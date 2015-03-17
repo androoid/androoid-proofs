@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Library Proof</string>
+    <string name="welcome_text">Welcome to Library Proof Android Application</string>
+    <string name="label_list_authors">List Authors</string>
+    <string name="label_add_authors">Add New Author</string>
+    <string name="title_activity_author">Authors</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="action_add_author">Add New Author</string>
+    <string name="action_search_author">Search Author</string>
+
+    <string name="title_activity_author_form">Add New Author</string>
+    <string name="author_name">Author Name</string>
+    <string name="label_save_author">Save Author</string>
+    <string name="author_biography">Author Biography</string>
+
+</resources>

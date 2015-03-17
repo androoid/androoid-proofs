@@ -1,0 +1,19 @@
+#
+# generated on 2015/03/17 11:17:50
+#
+# --table-start--
+dataClass=io.androoid.libraryproof.domain.Author
+tableName=author
+# --table-fields-start--
+# --field-start--
+fieldName=id
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=biography
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

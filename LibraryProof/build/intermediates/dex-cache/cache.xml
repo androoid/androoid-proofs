@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/jugade92/Documents/adt-bundle-mac-x86_64-20130917/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-a9a8b5b178d6fc7d754922124c13d09773ed56c7.jar" />
+    </item>
+    <item
+        jar="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-3e0dd532cc3e240535a56592c4ab7de09dba501a.jar" />
+    </item>
+    <item
+        jar="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/pre-dexed/debug/classes-e720eca701512b08916cbcea9496dc91a11ede17.jar" />
+    </item>
+    <item
+        jar="/Users/jugade92/.gradle/caches/modules-2/files-2.1/com.j256.ormlite/ormlite-core/4.48/e579bd2905d0399af5029aaaf9817d5fa0ca88a5/ormlite-core-4.48.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
+        <dex dex="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/pre-dexed/debug/ormlite-core-4.48-514ae336ee40463795410fbc2e23230c51c19156.jar" />
+    </item>
+    <item
+        jar="/Users/jugade92/.gradle/caches/modules-2/files-2.1/com.j256.ormlite/ormlite-android/4.48/afa06f539a4026c10b247386312aa67404b80a16/ormlite-android-4.48.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/pre-dexed/debug/ormlite-android-4.48-973a7cb85d3d6823b6c9f7ff913a9d843a629c69.jar" />
+    </item>
+
+</items>
