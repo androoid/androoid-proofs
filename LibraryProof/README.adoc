@@ -1,0 +1,7 @@
+== Library Proof
+
+=== Execution
+
+Download source code and execute:
+
+	gradle installDebug
