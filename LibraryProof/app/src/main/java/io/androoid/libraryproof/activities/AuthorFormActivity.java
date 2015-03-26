@@ -1,6 +1,7 @@
 package io.androoid.libraryproof.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -31,18 +32,6 @@ public class AuthorFormActivity extends OrmLiteBaseActivity<AuthorDatabaseHelper
 
         // Adding back button
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Button saveButton = (Button) findViewById(R.id.button_save_author);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Create new Author
-                createAuthor();
-                // Return to list
-                NavUtils.navigateUpFromSameTask(AuthorFormActivity.this);
-
-            }
-        });
-
     }
 
     /**
@@ -83,6 +72,12 @@ public class AuthorFormActivity extends OrmLiteBaseActivity<AuthorDatabaseHelper
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.action_save_author:
+                // Create new Author
+                createAuthor();
+                // Return to list
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }

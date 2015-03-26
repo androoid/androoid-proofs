@@ -1,19 +1,21 @@
 package io.androoid.libraryproof.activities;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.ActionMode;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -26,17 +28,31 @@ import io.androoid.libraryproof.domain.Author;
 
 public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHelper> {
 
+    private ArrayAdapter adapter;
+
+    private View currentViewSelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.author_activity);
+        setContentView(R.layout.author_list_activity);
 
         // Adding back button
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Only one item could be selected
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        // Getting ListView
+        // Getting author list
+        ListView authorListView = (ListView)  findViewById(android.R.id.list);
+
+        // Registering item click
+        registerItemClick(authorListView);
+
         // Fill author list with Authors from Database
         try {
-            fillAuthorList();
+            fillAuthorList(authorListView);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,9 +61,11 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
     /**
      * Method that fills author list with authors getted from Database
      *
+     * @param authorListView
      * @throws SQLException
      */
-    private void fillAuthorList() throws SQLException{
+
+    private void fillAuthorList(ListView authorListView) throws SQLException{
         Dao<Author, BigDecimal> authorDao = getHelper().getAuthorDao();
         List<Author> authors = authorDao.queryForAll();
 
@@ -58,11 +76,10 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
         }
 
         // Creating array adapter
-        final ArrayAdapter adapter = new ArrayAdapter(this,
+        adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, authorList);
 
-        // Getting author list
-        ListView authorListView = (ListView)  findViewById(android.R.id.list);
+
         authorListView.setAdapter(adapter);
     }
 
@@ -86,6 +103,58 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * Method that register item click listener on each element
+     */
+    private void registerItemClick(ListView authorListView){
+
+        authorListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
+                // Getting selected element
+                if(currentViewSelected != null){
+                    currentViewSelected.setBackgroundResource(android.R.drawable.list_selector_background);
+                    currentViewSelected.setSelected(false);
+                }
+
+                // Select current item
+                AuthorListActivity.this.startActionMode(new AuthorActionBarCallback());
+                view.setBackgroundColor(getResources().getColor(R.color.selected));
+                view.setSelected(true);
+
+                // Saving current view selected
+                currentViewSelected = view;
+            }
+        });
+
+    }
+
+    class AuthorActionBarCallback implements ActionMode.Callback {
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            return false;
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
+            return true;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
     }
 
 }
