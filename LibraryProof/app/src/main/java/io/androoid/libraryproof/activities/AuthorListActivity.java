@@ -5,11 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.ActionMode;
-import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -29,30 +29,124 @@ import io.androoid.libraryproof.domain.Author;
 public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHelper> {
 
     private ArrayAdapter adapter;
-
-    private View currentViewSelected;
+    private List<Author> selectedAuthors = new ArrayList<Author>();
+    private ArrayList<Author> authorList;
+    private Menu contextualMenu;
+    private Dao<Author, BigDecimal> authorDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.author_list_activity);
 
+        // Creating Author DAO
+        try{
+            authorDao = getHelper().getAuthorDao();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
         // Adding back button
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Only one item could be selected
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        // Adding selector
+        this.getListView().setSelector(R.drawable.selector);
 
-        // Getting ListView
-        // Getting author list
-        ListView authorListView = (ListView)  findViewById(android.R.id.list);
+        // Creating multiple choice view
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        getListView().setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-        // Registering item click
-        registerItemClick(authorListView);
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position,
+                                                  long id, boolean checked) {
+
+                // Getting current item
+                Author author = (Author) getListView().getItemAtPosition(position);
+                View child = getListView().getChildAt(position);
+
+                // Checking if current item was checked before
+                if(selectedAuthors.indexOf(author) != -1){
+                    // Removing element from selected Authors
+                    selectedAuthors.remove(selectedAuthors.indexOf(author));
+                    // Removing background
+                    if(child != null) {
+                        child.setSelected(false);
+                        child.setBackgroundColor(Color.WHITE);
+                    }
+                }else{
+                    // Adding element to selected Authors
+                    selectedAuthors.add(author);
+                    // Changing background
+                    if(child != null) {
+                        child.setSelected(true);
+                        child.setBackgroundColor(Color.parseColor("#6DCAEC"));
+                    }
+                }
+
+                int checkedItems = getListView().getCheckedItemCount();
+
+                if(checkedItems > 0){
+                    mode.setSubtitle(String.format("%s author%s selected", checkedItems, checkedItems > 1 ? "s" : ""));
+                }
+
+                // If there are more than one selected item, is not possible edit or show elements
+                if(contextualMenu != null){
+                    MenuItem showMenuItem = contextualMenu.getItem(0);
+                    MenuItem editMenuItem = contextualMenu.getItem(1);
+
+                    boolean toShow = true;
+
+                    if(checkedItems > 1){
+                        toShow = false;
+                    }
+
+                    showMenuItem.setVisible(toShow);
+                    editMenuItem.setVisible(toShow);
+                }
+
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                // Respond to clicks on the actions in the CAB
+                if(item.getTitle().equals("Show")){
+                    return true;
+                }else if(item.getTitle().equals("Edit")){
+                    return true;
+                }else if(item.getTitle().equals("Delete")){
+                    removeAuthors();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                // Setting title
+                mode.setTitle("Selected Authors");
+                // Inflate the menu for the CAB
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.contextual_menu, menu);
+                contextualMenu = menu;
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                // Here you can make any necessary updates to the activity when
+                // the CAB is removed. By default, selected items are deselected/unchecked.
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+        });
 
         // Fill author list with Authors from Database
         try {
-            fillAuthorList(authorListView);
+            fillAuthorList();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,18 +155,16 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
     /**
      * Method that fills author list with authors getted from Database
      *
-     * @param authorListView
      * @throws SQLException
      */
 
-    private void fillAuthorList(ListView authorListView) throws SQLException{
-        Dao<Author, BigDecimal> authorDao = getHelper().getAuthorDao();
+    private void fillAuthorList() throws SQLException{
         List<Author> authors = authorDao.queryForAll();
 
         // Creating author ArrayList
-        final ArrayList<String> authorList = new ArrayList<String>();
+        authorList = new ArrayList<Author>();
         for(Author author : authors){
-            authorList.add(author.toString());
+            authorList.add(author);
         }
 
         // Creating array adapter
@@ -80,7 +172,22 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
                 android.R.layout.simple_list_item_1, authorList);
 
 
-        authorListView.setAdapter(adapter);
+        getListView().setAdapter(adapter);
+    }
+
+    /**
+     * Method that removes all selected authors
+     */
+    private void removeAuthors(){
+        try {
+            // Removing all selected authors
+            for(Author author : selectedAuthors){
+                authorDao.delete(author);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -103,58 +210,6 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-
-    /**
-     * Method that register item click listener on each element
-     */
-    private void registerItemClick(ListView authorListView){
-
-        authorListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
-                // Getting selected element
-                if(currentViewSelected != null){
-                    currentViewSelected.setBackgroundResource(android.R.drawable.list_selector_background);
-                    currentViewSelected.setSelected(false);
-                }
-
-                // Select current item
-                AuthorListActivity.this.startActionMode(new AuthorActionBarCallback());
-                view.setBackgroundColor(getResources().getColor(R.color.selected));
-                view.setSelected(true);
-
-                // Saving current view selected
-                currentViewSelected = view;
-            }
-        });
-
-    }
-
-    class AuthorActionBarCallback implements ActionMode.Callback {
-
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            return false;
-        }
-
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            mode.getMenuInflater().inflate(R.menu.contextual_menu, menu);
-            return true;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-        }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false;
-        }
-
     }
 
 }

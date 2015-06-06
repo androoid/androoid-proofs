@@ -17,7 +17,7 @@ import java.util.List;
 @DatabaseTable
 public class Author {
 
-    @DatabaseField
+    @DatabaseField(id = true, generatedId = true)
     private BigDecimal id;
 
     @DatabaseField
