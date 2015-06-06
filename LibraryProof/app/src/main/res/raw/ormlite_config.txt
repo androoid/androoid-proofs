@@ -1,5 +1,5 @@
 #
-# generated on 2015/03/17 11:17:50
+# generated on 2015/06/06 08:12:55
 #
 # --table-start--
 dataClass=io.androoid.libraryproof.domain.Author
@@ -7,6 +7,7 @@ tableName=author
 # --table-fields-start--
 # --field-start--
 fieldName=id
+generatedId=true
 # --field-end--
 # --field-start--
 fieldName=name

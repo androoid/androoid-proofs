@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
@@ -181,9 +182,16 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
     private void removeAuthors(){
         try {
             // Removing all selected authors
-            for(Author author : selectedAuthors){
-                authorDao.delete(author);
-            }
+            Integer deleted = authorDao.delete(selectedAuthors);
+
+            // Show message with total deleted items
+            String message = String.format("%s %s deleted", deleted, deleted > 1 ? "authors were" : "author was");
+            Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+            toast.show();
+
+            // Refresh activity
+            finish();
+            startActivity(getIntent());
 
         } catch (SQLException e) {
             e.printStackTrace();

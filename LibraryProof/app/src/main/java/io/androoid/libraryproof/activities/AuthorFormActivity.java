@@ -53,6 +53,9 @@ public class AuthorFormActivity extends OrmLiteBaseActivity<AuthorDatabaseHelper
             Author author = new Author(authorName,authorBiography);
             authorDao.create(author);
 
+            Integer id = author.getId();
+            String test = "";
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
