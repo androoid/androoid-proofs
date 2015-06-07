@@ -36,6 +36,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.authors.AuthorListActivity" />
         </activity>
+        <activity
+            android:name=".activities.books.BookListActivity"
+            android:label="@string/title_activity_book"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

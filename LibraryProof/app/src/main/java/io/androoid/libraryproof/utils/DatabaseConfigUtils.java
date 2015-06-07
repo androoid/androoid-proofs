@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by Juan Carlos García on 17/3/15.
+ *
+ * @author Juan Carlos García
+ * @since 1.0
  */
 public class DatabaseConfigUtils extends OrmLiteConfigUtil{
 

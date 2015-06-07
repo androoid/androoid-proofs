@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import io.androoid.libraryproof.R;
 
 /**
- * Created by Juan Carlos García on 4/4/15.
+ *
+ * @author Juan Carlos García
+ * @since 1.0
  */
 public class ActionBarCallback implements ActionMode.Callback {
 

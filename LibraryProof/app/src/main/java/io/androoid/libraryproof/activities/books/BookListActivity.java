@@ -1,6 +1,5 @@
-package io.androoid.libraryproof.activities.authors;
+package io.androoid.libraryproof.activities.books;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -15,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.j256.ormlite.dao.Dao;
 
@@ -24,27 +22,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.androoid.libraryproof.R;
-import io.androoid.libraryproof.db.AuthorDatabaseHelper;
-import io.androoid.libraryproof.domain.Author;
+import io.androoid.libraryproof.db.BookDatabaseHelper;
+import io.androoid.libraryproof.domain.Book;
 
 /**
  *
  * @author Juan Carlos García
  * @since 1.0
  */
-public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHelper> implements
+public class BookListActivity extends OrmLiteBaseListActivity<BookDatabaseHelper> implements
         AbsListView.MultiChoiceModeListener, AdapterView.OnItemClickListener{
 
     private ArrayAdapter adapter;
-    private List<Author> selectedAuthors = new ArrayList<Author>();
-    private ArrayList<Author> authorList;
+    private List<Book> selectedBooks = new ArrayList<Book>();
+    private ArrayList<Book> bookList;
     private Menu contextualMenu;
     private ActionMode actionMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.author_list_activity);
+        setContentView(R.layout.book_list_activity);
 
         // Adding back button
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,53 +57,53 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         getListView().setMultiChoiceModeListener(this);
 
-        // Fill author list with Authors from Database
+        // Fill book list with Books from Database
         try {
-            fillAuthorList();
+            fillBookList();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Method that fills author list with authors getted from Database
+     * Method that fills book list with Books getted from Database
      *
-     * @throws SQLException
+     * @throws java.sql.SQLException
      */
 
-    private void fillAuthorList() throws SQLException{
+    private void fillBookList() throws SQLException{
 
-        Dao<Author, Integer> authorDao = getHelper().getAuthorDao();
+        Dao<Book, Integer> bookDao = getHelper().getBookDao();
 
-        List<Author> authors = authorDao.queryForAll();
+        List<Book> books = bookDao.queryForAll();
 
-        // Creating author ArrayList
-        authorList = new ArrayList<Author>();
-        for(Author author : authors){
-            authorList.add(author);
+        // Creating book ArrayList
+        bookList = new ArrayList<Book>();
+        for(Book book : books){
+            bookList.add(book);
         }
 
         // Creating array adapter
         adapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, authorList);
+                android.R.layout.simple_list_item_1, bookList);
 
 
         getListView().setAdapter(adapter);
     }
 
     /**
-     * Method that removes all selected authors
+     * Method that removes all selected books
      *
-     * @throws SQLException
+     * @throws java.sql.SQLException
      */
-    private void removeAuthors() throws SQLException{
-        // Removing all selected authors
-        Dao<Author, Integer> authorDao = getHelper().getAuthorDao();
-        Integer deleted = authorDao.delete(selectedAuthors);
+    private void removeBooks() throws SQLException{
+        // Removing all selected books
+        Dao<Book, Integer> bookDao = getHelper().getBookDao();
+        Integer deleted = bookDao.delete(selectedBooks);
 
 
         // Show message with total deleted items
-        String message = String.format("%s %s deleted", deleted, deleted > 1 ? "authors were" : "author was");
+        String message = String.format("%s %s deleted", deleted, deleted > 1 ? "books were" : "book was");
         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
         toast.show();
 
@@ -129,8 +127,8 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_add:
-                Intent intent = new Intent(AuthorListActivity.this, AuthorFormActivity.class);
-                AuthorListActivity.this.startActivity(intent);
+                /*Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
+                BookListActivity.this.startActivity(intent);*/
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -147,21 +145,21 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
     @Override
     public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
         // Getting current item
-        Author author = (Author) getListView().getItemAtPosition(position);
+        Book book = (Book) getListView().getItemAtPosition(position);
         View child = getListView().getChildAt(position);
 
         // Checking if current item was checked before
-        if(selectedAuthors.indexOf(author) != -1){
-            // Removing element from selected Authors
-            selectedAuthors.remove(selectedAuthors.indexOf(author));
+        if(selectedBooks.indexOf(book) != -1){
+            // Removing element from selected Books
+            selectedBooks.remove(selectedBooks.indexOf(book));
             // Removing background
             if(child != null) {
                 child.setSelected(false);
                 child.setBackgroundColor(Color.WHITE);
             }
         }else{
-            // Adding element to selected Authors
-            selectedAuthors.add(author);
+            // Adding element to selected Books
+            selectedBooks.add(book);
             // Changing background
             if(child != null) {
                 child.setSelected(true);
@@ -172,7 +170,7 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
         int checkedItems = getListView().getCheckedItemCount();
 
         if(checkedItems > 0){
-            mode.setSubtitle(String.format("%s author%s selected", checkedItems, checkedItems > 1 ? "s" : ""));
+            mode.setSubtitle(String.format("%s book%s selected", checkedItems, checkedItems > 1 ? "s" : ""));
         }
 
         // If there are more than one selected item, is not possible edit or show elements
@@ -203,7 +201,7 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         // Setting title
-        mode.setTitle("Selected Authors");
+        mode.setTitle("Selected Books");
         // Inflate the menu for the CAB
         MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.contextual_menu, menu);
@@ -235,27 +233,27 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         // Respond to clicks on the actions in the CAB
-        Intent intent = new Intent(AuthorListActivity.this, AuthorFormActivity.class);
-        Bundle bundle = new Bundle();
+        /*Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
+        Bundle bundle = new Bundle();*/
 
         switch (item.getItemId()) {
             case R.id.item_show:
-                // Show selected author
-                bundle.putInt("authorId", selectedAuthors.get(0).getId());
+                // Show selected book
+                /*bundle.putInt("bookId", selectedBooks.get(0).getId());
                 bundle.putString("mode", "show");
                 intent.putExtras(bundle);
-                AuthorListActivity.this.startActivity(intent);
+                BookListActivity.this.startActivity(intent);*/
                 break;
             case R.id.item_edit:
-                // Edit selected author
-                bundle.putInt("authorId", selectedAuthors.get(0).getId());
+                // Edit selected book
+                /*bundle.putInt("bookId", selectedBooks.get(0).getId());
                 intent.putExtras(bundle);
-                AuthorListActivity.this.startActivity(intent);
+                BookListActivity.this.startActivity(intent);*/
                 break;
             case R.id.item_delete:
-                // Remove all selected authors
+                // Remove all selected books
                 try {
-                    removeAuthors();
+                    removeBooks();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -271,10 +269,10 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
      */
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        // Cleaning selected authors
-        selectedAuthors.clear();
+        // Cleaning selected books
+        selectedBooks.clear();
         try {
-            fillAuthorList();
+            fillBookList();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -296,13 +294,13 @@ public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHe
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // Show selected author
-        Intent intent = new Intent(AuthorListActivity.this, AuthorFormActivity.class);
+        // Show selected book
+        /*Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
         Bundle bundle = new Bundle();
-        Author author = (Author) getListView().getItemAtPosition(position);
-        bundle.putInt("authorId", author.getId());
+        Book book = (Book) getListView().getItemAtPosition(position);
+        bundle.putInt("bookId", book.getId());
         bundle.putString("mode", "show");
         intent.putExtras(bundle);
-        AuthorListActivity.this.startActivity(intent);
+        BookListActivity.this.startActivity(intent);*/
     }
 }

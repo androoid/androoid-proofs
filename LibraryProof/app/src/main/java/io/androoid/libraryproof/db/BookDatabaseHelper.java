@@ -1,9 +1,7 @@
 package io.androoid.libraryproof.db;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -16,21 +14,22 @@ import java.sql.SQLException;
 
 import io.androoid.libraryproof.R;
 import io.androoid.libraryproof.domain.Author;
+import io.androoid.libraryproof.domain.Book;
 
 /**
  *
  * @author Juan Carlos García
  * @since 1.0
  */
-public class AuthorDatabaseHelper extends OrmLiteSqliteOpenHelper {
+public class BookDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "libraryproof.db";
     private static final int DATABASE_VERSION = 1;
 
-    private Dao<Author, Integer> authorDao = null;
-    private RuntimeExceptionDao<Author, Integer> runtimeExceptionAuthorDao = null;
+    private Dao<Book, Integer> bookDao = null;
+    private RuntimeExceptionDao<Book, Integer> runtimeExceptionBookDao = null;
 
-    public AuthorDatabaseHelper(Context context){
+    public BookDatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
     }
 
@@ -49,7 +48,7 @@ public class AuthorDatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable(connectionSource, Author.class);
+            TableUtils.createTable(connectionSource, Book.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,7 +71,7 @@ public class AuthorDatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource, Author.class, true);
+            TableUtils.dropTable(connectionSource, Book.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,25 +79,25 @@ public class AuthorDatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
 
-    public Dao<Author, Integer> getAuthorDao() throws SQLException{
-        if(authorDao == null){
-            authorDao = getDao(Author.class);
+    public Dao<Book, Integer> getBookDao() throws SQLException{
+        if(bookDao == null){
+            bookDao = getDao(Book.class);
         }
-        return authorDao;
+        return bookDao;
     }
 
-    public RuntimeExceptionDao<Author, Integer> getRuntimeExceptionAuthorDao() throws SQLException{
-        if(runtimeExceptionAuthorDao == null){
-            runtimeExceptionAuthorDao = getRuntimeExceptionDao(Author.class);
+    public RuntimeExceptionDao<Book, Integer> getRuntimeExceptionAuthorDao() throws SQLException{
+        if(runtimeExceptionBookDao == null){
+            runtimeExceptionBookDao = getRuntimeExceptionDao(Book.class);
         }
-        return runtimeExceptionAuthorDao;
+        return runtimeExceptionBookDao;
     }
 
     @Override
     public void close(){
         super.close();
-        authorDao = null;
-        runtimeExceptionAuthorDao = null;
+        bookDao = null;
+        runtimeExceptionBookDao = null;
     }
 
 }

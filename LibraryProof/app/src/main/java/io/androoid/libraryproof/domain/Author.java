@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Juan Carlos García on 8/3/15.
+ *
+ * @author Juan Carlos García
+ * @since 1.0
  */
-
 @DatabaseTable
 public class Author {
 
