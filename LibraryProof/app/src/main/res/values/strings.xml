@@ -10,7 +10,8 @@
     <string name="action_add_author">Add New Author</string>
     <string name="action_save_author">Save Author</string>
 
-    <string name="title_activity_author_form">Add New Author</string>
+    <string name="title_activity_author_form_create">Add New Author</string>
+    <string name="title_activity_author_form_update">Edit Author</string>
     <string name="author_name">Author Name</string>
     <string name="label_save_author">Save Author</string>
     <string name="author_biography">Author Biography</string>

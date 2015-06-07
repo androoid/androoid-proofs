@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import io.androoid.libraryproof.R;
+import io.androoid.libraryproof.activities.authors.AuthorListActivity;
 
 /**
  * Created by Juan Carlos García on 4/3/15.

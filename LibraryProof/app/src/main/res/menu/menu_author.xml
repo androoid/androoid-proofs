@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="io.androoid.libraryproof.activities.AuthorListActivity">
+    tools:context="io.androoid.libraryproof.activities.authors.AuthorListActivity">
     <item android:id="@+id/action_add_author"
         android:icon="@drawable/ic_action_new"
         android:title="@string/action_add_author"

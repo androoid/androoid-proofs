@@ -16,13 +16,6 @@
         <dex dex="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-3e0dd532cc3e240535a56592c4ab7de09dba501a.jar" />
     </item>
     <item
-        jar="/Users/jugade92/Desktop/androoid/proofs/LibraryProof/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/jugade92/Desktop/androoid/proofs/LibraryProof/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-ab350f2b02ba65232d4d636bfcb24d7c62dfb8b8.jar" />
-    </item>
-    <item
         jar="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -42,13 +35,6 @@
         revision="21.1.2"
         sha1="afa06f539a4026c10b247386312aa67404b80a16">
         <dex dex="/Users/jugade92/AndroidStudioProjects/LibraryProof/app/build/intermediates/pre-dexed/debug/ormlite-android-4.48-973a7cb85d3d6823b6c9f7ff913a9d843a629c69.jar" />
-    </item>
-    <item
-        jar="/Users/jugade92/Desktop/androoid/proofs/LibraryProof/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/jugade92/Desktop/androoid/proofs/LibraryProof/app/build/intermediates/pre-dexed/debug/classes-c4de39815cea5b06a6bc6e2ebe3b8693db6bc4e1.jar" />
     </item>
 
 </items>
