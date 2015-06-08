@@ -2,6 +2,13 @@
 
 === Execution
 
+To execute this Android proof application, is necessary to have installed the following tools on your system:
+
+* Gradle 2.2
+* Android SDK 21
+* Install Android Tools ADB 
+** Ex: On Ubuntu use "sudo apt-get install android-tools-adb"
+
 Download source code and execute:
 
 	gradle installDebug
