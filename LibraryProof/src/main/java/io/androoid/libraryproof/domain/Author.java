@@ -38,10 +38,6 @@ public class Author {
     }
 
 
-    public String toString(){
-        return this.name;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -66,5 +62,8 @@ public class Author {
         this.biography = biography;
     }
 
+    public String toString(){
+        return this.name;
+    }
 
 }

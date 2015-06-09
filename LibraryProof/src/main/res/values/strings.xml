@@ -14,11 +14,19 @@
     <string name="title_activity_author_form_update">Edit Author</string>
     <string name="title_activity_author_form_show">Show Author</string>
     <string name="author_name">Author Name</string>
-    <string name="label_save_author">Save Author</string>
     <string name="author_biography">Author Biography</string>
 
     <!-- Books -->
     <string name="label_list_books">List Books</string>
+    <string name="label_add_books">Add New Book</string>
     <string name="title_activity_book">Books</string>
+    <string name="title_activity_book_form_create">Add New Book</string>
+    <string name="title_activity_book_form_update">Edit Book</string>
+    <string name="title_activity_book_form_show">Show Book</string>
+    <string name="book_title">Title</string>
+    <string name="book_isbn">ISBN</string>
+    <string name="book_year">Year</string>
+    <string name="book_author">Author</string>
+
 
 </resources>

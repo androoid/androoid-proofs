@@ -12,7 +12,7 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 
 import io.androoid.libraryproof.R;
-import io.androoid.libraryproof.db.AuthorDatabaseHelper;
+import io.androoid.libraryproof.utils.DatabaseHelper;
 import io.androoid.libraryproof.domain.Author;
 
 /**
@@ -20,7 +20,7 @@ import io.androoid.libraryproof.domain.Author;
  * @author Juan Carlos García
  * @since 1.0
  */
-public class AuthorFormActivity extends OrmLiteBaseActivity<AuthorDatabaseHelper> {
+public class AuthorFormActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
     private Author author;
     private EditText authorNameEditText;

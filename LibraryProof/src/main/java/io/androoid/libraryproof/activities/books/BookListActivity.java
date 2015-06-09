@@ -1,5 +1,6 @@
 package io.androoid.libraryproof.activities.books;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.androoid.libraryproof.R;
-import io.androoid.libraryproof.db.BookDatabaseHelper;
+import io.androoid.libraryproof.utils.DatabaseHelper;
 import io.androoid.libraryproof.domain.Book;
 
 /**
@@ -30,7 +31,7 @@ import io.androoid.libraryproof.domain.Book;
  * @author Juan Carlos García
  * @since 1.0
  */
-public class BookListActivity extends OrmLiteBaseListActivity<BookDatabaseHelper> implements
+public class BookListActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements
         AbsListView.MultiChoiceModeListener, AdapterView.OnItemClickListener{
 
     private ArrayAdapter adapter;
@@ -127,8 +128,8 @@ public class BookListActivity extends OrmLiteBaseListActivity<BookDatabaseHelper
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_add:
-                /*Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
-                BookListActivity.this.startActivity(intent);*/
+                Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
+                BookListActivity.this.startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -233,22 +234,22 @@ public class BookListActivity extends OrmLiteBaseListActivity<BookDatabaseHelper
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         // Respond to clicks on the actions in the CAB
-        /*Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
-        Bundle bundle = new Bundle();*/
+        Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
+        Bundle bundle = new Bundle();
 
         switch (item.getItemId()) {
             case R.id.item_show:
                 // Show selected book
-                /*bundle.putInt("bookId", selectedBooks.get(0).getId());
+                bundle.putInt("bookId", selectedBooks.get(0).getId());
                 bundle.putString("mode", "show");
                 intent.putExtras(bundle);
-                BookListActivity.this.startActivity(intent);*/
+                BookListActivity.this.startActivity(intent);
                 break;
             case R.id.item_edit:
                 // Edit selected book
-                /*bundle.putInt("bookId", selectedBooks.get(0).getId());
+                bundle.putInt("bookId", selectedBooks.get(0).getId());
                 intent.putExtras(bundle);
-                BookListActivity.this.startActivity(intent);*/
+                BookListActivity.this.startActivity(intent);
                 break;
             case R.id.item_delete:
                 // Remove all selected books
@@ -295,12 +296,12 @@ public class BookListActivity extends OrmLiteBaseListActivity<BookDatabaseHelper
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // Show selected book
-        /*Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
+        Intent intent = new Intent(BookListActivity.this, BookFormActivity.class);
         Bundle bundle = new Bundle();
         Book book = (Book) getListView().getItemAtPosition(position);
         bundle.putInt("bookId", book.getId());
         bundle.putString("mode", "show");
         intent.putExtras(bundle);
-        BookListActivity.this.startActivity(intent);*/
+        BookListActivity.this.startActivity(intent);
     }
 }

@@ -1,23 +1,6 @@
 #
-# generated on 2015/06/07 12:13:51
+# generated on 2015/06/09 05:31:55
 #
-# --table-start--
-dataClass=io.androoid.libraryproof.domain.Author
-tableName=author
-# --table-fields-start--
-# --field-start--
-fieldName=id
-generatedId=true
-# --field-end--
-# --field-start--
-fieldName=name
-# --field-end--
-# --field-start--
-fieldName=biography
-# --field-end--
-# --table-fields-end--
-# --table-end--
-#################################
 # --table-start--
 dataClass=io.androoid.libraryproof.domain.Book
 tableName=book
@@ -37,6 +20,25 @@ fieldName=year
 # --field-end--
 # --field-start--
 fieldName=author
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=io.androoid.libraryproof.domain.Author
+tableName=author
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=biography
 # --field-end--
 # --table-fields-end--
 # --table-end--

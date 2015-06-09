@@ -24,7 +24,7 @@ public class Book {
     @DatabaseField
     private Integer year;
 
-    @DatabaseField
+    @DatabaseField(foreign = true, foreignAutoRefresh=true, canBeNull=true)
     private Author author;
 
 
@@ -78,5 +78,9 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public String toString(){
+        return this.title;
     }
 }

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.androoid.libraryproof.R;
-import io.androoid.libraryproof.db.AuthorDatabaseHelper;
+import io.androoid.libraryproof.utils.DatabaseHelper;
 import io.androoid.libraryproof.domain.Author;
 
 /**
@@ -32,7 +32,7 @@ import io.androoid.libraryproof.domain.Author;
  * @author Juan Carlos García
  * @since 1.0
  */
-public class AuthorListActivity extends OrmLiteBaseListActivity<AuthorDatabaseHelper> implements
+public class AuthorListActivity extends OrmLiteBaseListActivity<DatabaseHelper> implements
         AbsListView.MultiChoiceModeListener, AdapterView.OnItemClickListener{
 
     private ArrayAdapter adapter;
