@@ -1,14 +1,44 @@
 == Library Proof
 
-=== Execution
+Thanks for checking out Androoid Library Proof from Git.
 
-To execute this Android proof application, is necessary to have installed the following tools on your system:
+This guide allows developers to deploy Androoid Library Proof from source
+code on their own devices.
 
-* Gradle 2.2
+Download Androoid Library Proof source code from Git using:
+
+  git clone https://github.com/androoid/androoid-proofs.git
+  cd androoid-proofs/LibraryProof
+
+If you prefer to test this Library Proof application, you could download it
+from link:#https://play.google.com/store/apps[Google Play]
+
+=== Pre-Requisites
+
+To execute this Android proof application on your own device from source code,
+is necessary to have:
+
+* Gradle 2.2+
 * Android SDK 21
-* Install Android Tools ADB 
-** Ex: On Ubuntu use "sudo apt-get install android-tools-adb"
+* Define $ANDROID_HOME variable in your PATH system
 
-Download source code and execute:
+Also, yo need to generate a key store to sign generated .apk
 
-	gradle installDebug
+==== Generate Key Store
+
+Key store is a password-protected file that contains public/private key pairs used for JAR signatures. Protect this key. If you lose it, you won’t be able to update your app.
+
+  keytool -genkey -v -keystore android.keystore -alias android-keystore -keyalg RSA -validity 10000 -storepass PASSWORD1 -keypass PASSWORD2
+
+=== Execution 
+
+==== Generating signed release APK using Gradle
+
+Define two system variables for the keystore file and alias:
+
+  export ANDROID_KEYSTORE=<path>
+  export ANDROID_KEYALIAS=<alias>
+
+Now, you can generate the signed and zipaligned release APK using the Gradle task:
+
+  gradle assembleRelease
