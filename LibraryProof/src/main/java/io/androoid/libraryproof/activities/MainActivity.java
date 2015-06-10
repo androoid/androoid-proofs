@@ -9,6 +9,7 @@ import android.widget.Button;
 import io.androoid.libraryproof.R;
 import io.androoid.libraryproof.activities.authors.AuthorListActivity;
 import io.androoid.libraryproof.activities.books.BookListActivity;
+import io.androoid.libraryproof.activities.libraries.LibraryListActivity;
 
 /**
  *
@@ -36,6 +37,15 @@ public class MainActivity extends Activity {
         listBooksButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BookListActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+
+        // List Libraries Button event
+        Button listLibrariesButton = (Button) findViewById(R.id.list_libraries_button);
+        listLibrariesButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LibraryListActivity.class);
                 MainActivity.this.startActivity(intent);
             }
         });

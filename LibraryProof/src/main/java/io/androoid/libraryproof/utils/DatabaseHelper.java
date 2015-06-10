@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import io.androoid.libraryproof.R;
 import io.androoid.libraryproof.domain.Author;
 import io.androoid.libraryproof.domain.Book;
+import io.androoid.libraryproof.domain.Library;
 
 /**
  *
@@ -26,13 +27,16 @@ import io.androoid.libraryproof.domain.Book;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "libraryproof.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     private Dao<Author, Integer> authorDao = null;
     private RuntimeExceptionDao<Author, Integer> runtimeExceptionAuthorDao = null;
 
     private Dao<Book, Integer> bookDao = null;
     private RuntimeExceptionDao<Book, Integer> runtimeExceptionBookDao = null;
+
+    private Dao<Library, Integer> libraryDao = null;
+    private RuntimeExceptionDao<Library, Integer> runtimeExceptionLibraryDao = null;
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
@@ -55,6 +59,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, Author.class);
             TableUtils.createTable(connectionSource, Book.class);
+            TableUtils.createTable(connectionSource, Library.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -79,6 +84,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.dropTable(connectionSource, Author.class, true);
             TableUtils.dropTable(connectionSource, Book.class, true);
+            TableUtils.dropTable(connectionSource, Library.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,6 +120,20 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return runtimeExceptionBookDao;
     }
 
+    public Dao<Library, Integer> getLibraryDao() throws SQLException{
+        if(libraryDao == null){
+            libraryDao = getDao(Library.class);
+        }
+        return libraryDao;
+    }
+
+    public RuntimeExceptionDao<Library, Integer> getRuntimeExceptionLibraryDao() throws SQLException{
+        if(runtimeExceptionLibraryDao == null){
+            runtimeExceptionLibraryDao = getRuntimeExceptionDao(Library.class);
+        }
+        return runtimeExceptionLibraryDao;
+    }
+
     @Override
     public void close(){
         super.close();
@@ -121,6 +141,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         runtimeExceptionAuthorDao = null;
         bookDao = null;
         runtimeExceptionBookDao = null;
+        libraryDao = null;
+        runtimeExceptionLibraryDao = null;
     }
 
 }
