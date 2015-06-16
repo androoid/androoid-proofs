@@ -1,2 +1,7 @@
 LibraryProof/.gradle
 LibraryProof/.idea
+LibraryProof-maven/target
+LibraryProof-gradle/.idea
+LibraryProof-maven/.idea
+LibraryProof-gradle/.gradle
+LibraryProof-maven/.gradle

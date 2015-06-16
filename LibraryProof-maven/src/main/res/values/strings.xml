@@ -1,0 +1,45 @@
+<resources>
+    <!-- Global -->
+    <string name="app_name">Library Proof</string>
+    <string name="welcome_text">Welcome to Library Proof Android Application</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add">Add</string>
+    <string name="action_save">Save</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Authors -->
+    <string name="label_list_authors">List Authors</string>
+    <string name="label_add_authors">Add New Author</string>
+    <string name="title_activity_author">Authors</string>
+    <string name="title_activity_author_form_create">Add New Author</string>
+    <string name="title_activity_author_form_update">Edit Author</string>
+    <string name="title_activity_author_form_show">Show Author</string>
+    <string name="author_name">Author Name</string>
+    <string name="author_biography">Author Biography</string>
+
+    <!-- Books -->
+    <string name="label_list_books">List Books</string>
+    <string name="label_add_books">Add New Book</string>
+    <string name="title_activity_book">Books</string>
+    <string name="title_activity_book_form_create">Add New Book</string>
+    <string name="title_activity_book_form_update">Edit Book</string>
+    <string name="title_activity_book_form_show">Show Book</string>
+    <string name="book_title">Title</string>
+    <string name="book_isbn">ISBN</string>
+    <string name="book_year">Year</string>
+    <string name="book_author">Author</string>
+
+    <!-- Libaries -->
+    <string name="label_list_libraries">List Libraries</string>
+    <string name="label_add_libraries">Add New Library</string>
+    <string name="title_activity_library">Libraries</string>
+    <string name="title_activity_library_form_create">Add New Library</string>
+    <string name="title_activity_library_form_update">Edit Library</string>
+    <string name="title_activity_library_form_show">Show Library</string>
+    <string name="library_name">Name</string>
+    <string name="library_location">Street</string>
+    <string name="library_public">Is Public Library?</string>
+
+
+</resources>

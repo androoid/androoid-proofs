@@ -1,0 +1,66 @@
+#
+# generated on 2015/06/10 12:24:55
+#
+# --table-start--
+dataClass=io.androoid.libraryproof.domain.Book
+tableName=book
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=isbn
+# --field-end--
+# --field-start--
+fieldName=year
+# --field-end--
+# --field-start--
+fieldName=author
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=io.androoid.libraryproof.domain.Author
+tableName=author
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=biography
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=io.androoid.libraryproof.domain.Library
+tableName=library
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=location
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=publicLibrary
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
