@@ -41,6 +41,4 @@ Define two system variables for the keystore file and alias:
 
 Now, you can generate the signed and zipaligned release APK using the Maven task:
 
-  mvn clean package -Dsign.keystore=~/android.keystore
-  -Dsign.alias=android-keystore -Dsign.storepass=PASSWORD1
-  -Dsign.keypass=PASSWORD2
+  mvn clean package -Dsign.keystore=~/android.keystore -Dsign.alias=android-keystore -Dsign.storepass=PASSWORD1 -Dsign.keypass=PASSWORD2
