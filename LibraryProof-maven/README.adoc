@@ -18,7 +18,7 @@ from link:#https://play.google.com/store/apps[Google Play]
 To execute this Android proof application on your own device from source code,
 is necessary to have:
 
-* Gradle 2.2+
+* Maven 3.0.5+
 * Android SDK 21
 * Define $ANDROID_HOME variable in your PATH system
 
@@ -32,13 +32,15 @@ Key store is a password-protected file that contains public/private key pairs us
 
 === Execution 
 
-==== Generating signed release APK using Gradle
+==== Generating signed release APK using Maven
 
 Define two system variables for the keystore file and alias:
 
   export ANDROID_KEYSTORE=<path>
   export ANDROID_KEYALIAS=<alias>
 
-Now, you can generate the signed and zipaligned release APK using the Gradle task:
+Now, you can generate the signed and zipaligned release APK using the Maven task:
 
-  gradle assembleRelease
+  mvn clean package -Dsign.keystore=~/android.keystore
+  -Dsign.alias=android-keystore -Dsign.storepass=PASSWORD1
+  -Dsign.keypass=PASSWORD2
